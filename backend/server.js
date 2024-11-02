@@ -22,7 +22,7 @@ const server = http.createServer(app);
 
 // Set up CORS middleware for HTTP requests
 app.use(cors({
-    origin: 'http://localhost:3000', // Allow frontend requests
+    origin: 'https://fyp-pearl.vercel.app/', // Allow frontend requests
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 // Socket.io configuration to allow WebSocket connections with CORS
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:3000', // Allow WebSocket connections from frontend
+        origin: 'https://fyp-pearl.vercel.app/', // Allow WebSocket connections from frontend
         methods: ['GET', 'POST'],
         credentials: true
     }
