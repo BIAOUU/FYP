@@ -10,6 +10,7 @@ const MarketPage = () => {
   const { searchQuery } = useContext(SearchContext);
   const { user } = useContext(AuthContext); // Get the logged-in user
   const { products, error, totalPages, currentPage, setCurrentPage } = useProducts(searchQuery);
+  const apiUrl = process.env.REACT_APP_API_URL;
 
   // State for recommended products with deduplication from localStorage
   const [recommendedProducts, setRecommendedProducts] = useState(() =>
@@ -23,7 +24,7 @@ const MarketPage = () => {
     const fetchRecommendations = async () => {
       if (user && user.token) {
         try {
-          const response = await fetch('/api/recommendations', {
+          const response = await fetch('${apiUrl}/recommendations', {
             headers: { Authorization: `Bearer ${user.token}` },
           });
 
@@ -54,7 +55,7 @@ const MarketPage = () => {
   // 🚀 Track user interactions
   const trackInteraction = async (productId, interactionType) => {
     try {
-      await fetch('/api/interactions', {
+      await fetch('${apiUrl}/interactions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -73,7 +74,7 @@ const MarketPage = () => {
     const fetchGreatDeals = async () => {
       if (user) {
         try {
-          const response = await fetch('/api/products/great-deals');
+          const response = await fetch('${apiUrl}/products/great-deals');
           const data = await response.json();
           if (response.ok) {
             // Filter out unlisted products
