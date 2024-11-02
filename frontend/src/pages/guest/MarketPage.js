@@ -24,7 +24,7 @@ const MarketPage = () => {
     const fetchRecommendations = async () => {
       if (user && user.token) {
         try {
-          const response = await fetch('${apiUrl}/recommendations', {
+          const response = await fetch(`${apiUrl}/recommendations`, {
             headers: { Authorization: `Bearer ${user.token}` },
           });
 
@@ -55,7 +55,7 @@ const MarketPage = () => {
   // 🚀 Track user interactions
   const trackInteraction = async (productId, interactionType) => {
     try {
-      await fetch('${apiUrl}/interactions', {
+      await fetch(`${apiUrl}/interactions`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ const MarketPage = () => {
     const fetchGreatDeals = async () => {
       if (user) {
         try {
-          const response = await fetch('${apiUrl}/products/great-deals');
+          const response = await fetch(`${apiUrl}/products/great-deals`);
           const data = await response.json();
           if (response.ok) {
             // Filter out unlisted products
